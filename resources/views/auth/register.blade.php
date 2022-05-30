@@ -24,59 +24,55 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('[phone]') ? ' has-error' : '' }}">
-                            <label for="[phone]" class="col-md-4 control-label">phone</label>
+                        <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
+                            <label for="phone" class="col-md-4 control-label">phone</label>
 
                             <div class="col-md-6">
                                 <input id="phone" type="number" class="form-control" name="phone" value="{{ old('phone') }}" required>
 
-                                @if ($errors->has('[phone]'))
+                                @if ($errors->has('phone'))
                                 <span class="help-block">
-                                    <strong>{{ $errors->first('[phone]') }}</strong>
+                                    <strong>{{ $errors->first('phone') }}</strong>
                                 </span>
                                 @endif
                             </div>
                         </div>
 
 
-                        <div class="form-group{{ $errors->has('[address]') ? ' has-error' : '' }}">
-                            <label for="[address]" class="col-md-4 control-label">address</label>
+                        <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
+                            <label for="address" class="col-md-4 control-label">address</label>
 
                             <div class="col-md-6">
                                 <input id="address" type="text" class="form-control" name="address" value="{{ old('address') }}" required>
 
-                                @if ($errors->has('[address]'))
+                                @if ($errors->has('address'))
                                 <span class="help-block">
-                                    <strong>{{ $errors->first('[address]') }}</strong>
+                                    <strong>{{ $errors->first('address') }}</strong>
                                 </span>
                                 @endif
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('[education]') ? ' has-error' : '' }}">
-                            <label for="[education]" class="col-md-4 control-label">education</label>
+                        <div class="form-group{{ $errors->has('education') ? ' has-error' : '' }}">
+                            <label for="education" class="col-md-4 control-label">education</label>
 
                             <div class="col-md-6">
                                 <input id="education" type="text" class="form-control" name="education" value="{{ old('education') }}" required>
 
-                                @if ($errors->has('[education]'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('[education]') }}</strong>
-                                </span>
-                                @endif
+
                             </div>
                         </div>
 
 
-                        <div class="form-group{{ $errors->has('[work]') ? ' has-error' : '' }}">
-                            <label for="[work]" class="col-md-4 control-label">work</label>
+                        <div class="form-group{{ $errors->has('work') ? ' has-error' : '' }}">
+                            <label for="work" class="col-md-4 control-label">work</label>
 
                             <div class="col-md-6">
                                 <input id="work" type="text" class="form-control" name="work" value="{{ old('work') }}" required>
 
-                                @if ($errors->has('[work]'))
+                                @if ($errors->has('work'))
                                 <span class="help-block">
-                                    <strong>{{ $errors->first('[work]') }}</strong>
+                                    <strong>{{ $errors->first('work') }}</strong>
                                 </span>
                                 @endif
                             </div>

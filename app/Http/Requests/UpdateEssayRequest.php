@@ -26,7 +26,7 @@ class UpdateEssayRequest extends FormRequest
         return [
 
             'topic_id' => 'required',
-            'question_text' => 'required',
+            'essay_text' => 'required',
         ];
     }
 }

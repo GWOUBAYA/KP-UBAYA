@@ -129,7 +129,7 @@ class EssayAnswerController extends Controller
     public function massDestroy(Request $request)
     {
         if ($request->input('ids')) {
-            $entries = EssayAnswer::whereIn('id', $request->input('ids'))->get();
+            $entries = Essayanswer::whereIn('id', $request->input('ids'))->get();
 
             foreach ($entries as $entry) {
                 $entry->delete();

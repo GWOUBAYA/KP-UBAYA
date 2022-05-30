@@ -23,7 +23,7 @@ class EssayController extends Controller
      */
     public function index()
     {
-        $essays = Essay::all();
+        $essay = Essay::all();
 
         return view('essay.index', compact('essay'));
     }
