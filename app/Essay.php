@@ -45,6 +45,6 @@ class Essay extends Model
 
     public function options()
     {
-        return $this->hasMany(Essayanswer::class, 'essay_id')->withTrashed();
+        return $this->hasMany(EssayAnswer::class, 'essay_id')->withTrashed();
     }
 }

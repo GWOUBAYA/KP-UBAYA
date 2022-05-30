@@ -42,8 +42,31 @@ class EssayController extends Controller
 
         return view('essay.create', $relations);
     }
+    public function questions()
+    {
+        $essay = Essay::inRandomOrder()->get();
+        return view('tests.essay', compact('essay'));
+    }
+    public function answered(Request $request)
+    {
+
+        $result = 0;
+
+        foreach ($request->input('questions', []) as $key => $question) {
+            $status = 0;
+
+            EssayAnswer::create([
+                'user_id'     => Auth::id(),
+                'essay_id' => $question,
+                'answer'   => $request->input('answers.' . $question),
+                'correct'     => $status,
+            ]);
+        }
 
 
+
+        return redirect()->route('results.show');
+    }
     public function store(StoreEssayRequest $request)
     {
 

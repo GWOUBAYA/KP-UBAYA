@@ -14,11 +14,11 @@ use Illuminate\Database\Eloquent\Model;
  * @property tinyInteger $correct
  */
 
-class Essayanswer extends Model
+class EssayAnswer extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['user_id', 'test_id', 'essay_id', 'answer', 'correct'];
+    protected $fillable = ['user_id', 'essay_id', 'answer', 'correct'];
 
     public static function boot()
     {

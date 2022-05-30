@@ -6,6 +6,7 @@ use DB;
 use Auth;
 use App\Test;
 use App\TestAnswer;
+use App\Essay;
 use App\Topic;
 use App\Question;
 use App\QuestionsOption;
@@ -41,6 +42,11 @@ class TestsController extends Controller
         return view('tests.create', compact('questions'));
     }
 
+    public function essay()
+    {
+        $essay = Essay::inRandomOrder()->get();
+        return view('tests.essay', compact('essay'));
+    }
     /**
      * Store a newly solved Test in storage with results.
      *
@@ -59,8 +65,9 @@ class TestsController extends Controller
         foreach ($request->input('questions', []) as $key => $question) {
             $status = 0;
 
-            if ($request->input('answers.'.$question) != null
-                && QuestionsOption::find($request->input('answers.'.$question))->correct
+            if (
+                $request->input('answers.' . $question) != null
+                && QuestionsOption::find($request->input('answers.' . $question))->correct
             ) {
                 $status = 1;
                 $result++;
@@ -69,7 +76,7 @@ class TestsController extends Controller
                 'user_id'     => Auth::id(),
                 'test_id'     => $test->id,
                 'question_id' => $question,
-                'option_id'   => $request->input('answers.'.$question),
+                'option_id'   => $request->input('answers.' . $question),
                 'correct'     => $status,
             ]);
         }
