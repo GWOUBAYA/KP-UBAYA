@@ -1,4 +1,9 @@
 <?php
+use App\Http\Controllers\LoginController;
+use GuzzleHttp\Middleware;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+
 Route::get('/', function () {
     return redirect('/home');
 });
@@ -12,7 +17,7 @@ $this->post('logout', 'Auth\LoginController@logout')->name('auth.logout');
 
 // Registration Routes...
 $this->get('register', 'Auth\RegisterController@showRegistrationForm')->name('auth.register');
-$this->post('register', 'Auth\RegisterController@register')->name('auth.register');
+$this->post('register', 'RegisterController@store')->name('auth.register')->middleware('verified');;
 
 // Password Reset Routes...
 $this->get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('auth.password.reset');
@@ -41,7 +46,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('questions_options_mass_destroy', ['uses' => 'QuestionsOptionsController@massDestroy', 'as' => 'questions_options.mass_destroy']);
     Route::resource('results', 'ResultsController');
     Route::post('results_mass_destroy', ['uses' => 'ResultsController@massDestroy', 'as' => 'results.mass_destroy']);
+    Route::put('/essaycek/{id}', 'ResultsController@essayCek')->name("essaycek");
     Route::put('/accept/{id}', 'ResultsController@updateAcc')->name("acc");
     Route::put('/decline/{id}', 'ResultsController@updateDec')->name("dec");
+    Route::put('/accept2/{id1}/{id2}', 'ResultsController@updateAcc2')->name("acc2");
+    Route::put('/decline2/{id1}/{id2}', 'ResultsController@updateDec2')->name("dec2");
 
+    // Route::put('/download/{id}', 'ResultsController@updateAcc')->name("download");
+    Route::get('/download/{file}', 'ResultsController@download');
 });

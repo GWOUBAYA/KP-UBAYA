@@ -22,11 +22,17 @@
                 <thead>
                     <tr>
                     @if(Auth::user()->isAdmin())
-                        <th>@lang('quickadmin.results.fields.user')</th>
+                        <th>
+                            @lang('quickadmin.results.fields.user')
+                        </th>
+                        <th>
+                            Cek Essay
+                        </th>
                     @endif
                         <th>@lang('quickadmin.results.fields.date')</th>
                         <th>Status</th>
-                        <th>&nbsp;</th>
+                        <th>CV</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
 
@@ -35,7 +41,25 @@
                         @foreach ($results as $result)
                             <tr>
                             @if(Auth::user()->isAdmin())
-                                <td>{{ $result->name or '' }}</td>
+                                <td>
+                                    <div class="text-left">
+                                        {{ $result->name or '' }}
+                                    </div>
+                                    
+                                    
+                                </td>
+                                <td>
+                                    <div class="col-sm-12">
+                                        <form action="{{ route('essaycek', $result->id) }}" method="POST">
+                                            {{ csrf_field() }}
+                                            {{ method_field('put') }}
+    
+                                            <button type="submit" href="#" style="width: 100%" class="btn btn-success">
+                                                Cek
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
                             @endif
                                 <td>{{ $result->created_at or '' }}</td>
                                 @if($result->status == 0)
@@ -46,6 +70,10 @@
                                 <td>Ditolak</td>
                                 
                                 @endif
+                                <td>
+                                    <a href="/download/{{ $result->cv }}">Dokumentasi CV</a>
+                                </td>
+
                                 @if(Auth::user()->isAdmin())
                                 <td class="text-center">
                                     <div class="row justify-content-center">

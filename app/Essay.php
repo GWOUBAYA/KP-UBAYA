@@ -2,8 +2,8 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class Essay
@@ -14,19 +14,19 @@ use Illuminate\Database\Eloquent\Model;
  * @property text $code_snippet
  * @property text $answer_explanation
  * @property string $more_info_link
- */
+*/
 
 class Essay extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['essay_text', 'code_snippet', 'more_info_link', 'topic_id'];
+    protected $fillable = ['essay_text', 'code_snippet', 'answer_explanation', 'more_info_link', 'topic_id'];
 
     public static function boot()
     {
         parent::boot();
 
-        essay::observe(new \App\Observers\UserActionsObserver);
+        Question::observe(new \App\Observers\UserActionsObserver);
     }
 
     /**
@@ -41,10 +41,5 @@ class Essay extends Model
     public function topic()
     {
         return $this->belongsTo(Topic::class, 'topic_id')->withTrashed();
-    }
-
-    public function options()
-    {
-        return $this->hasMany(Essayanswer::class, 'essay_id')->withTrashed();
     }
 }

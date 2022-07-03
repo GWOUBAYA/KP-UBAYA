@@ -15,7 +15,7 @@ return [
 	'back_to_list' => 'Back to list',
 	'dashboard' => 'Dashboard',
 	'delete' => 'Delete',
-	'quickadmin_title' => 'LaraQuiz',
+	'quickadmin_title' => 'PUSLET UBAYA',
 
 	'user-management' => [
 		'title' => 'User Management',
@@ -101,7 +101,7 @@ return [
 		],
 	],
 
-	'laravel-quiz' => 'New Laravel Quiz',
+	'laravel-quiz' => 'New Quiz',
 	'quiz' => 'Answer these 10 questions. There\'s no time limit.',
 	'submit_quiz' => 'Submit answers',
 	'view-result' => 'View result',
