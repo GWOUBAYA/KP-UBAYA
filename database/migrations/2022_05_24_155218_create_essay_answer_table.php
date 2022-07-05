@@ -16,7 +16,6 @@ class CreateEssayAnswerTable extends Migration
         Schema::create('essay_answers', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned()->nullable();
-            $table->integer('test_id')->unsigned()->nullable();
             $table->integer('essay_id')->unsigned()->nullable();
             $table->tinyInteger('correct')->nullable()->default(0);
             $table->string('answer');

@@ -80,13 +80,6 @@ class EssayAnswerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateEssayAnswerRequest $request, $id)
-    {
-        $essaysoption = EssayAnswer::findOrFail($id);
-        $essaysoption->update($request->all());
-
-        return redirect()->route('essay_answer.index');
-    }
 
 
     /**

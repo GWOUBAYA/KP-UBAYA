@@ -9,6 +9,7 @@ use App\Essayresult;
 use Auth;
 use App\Test;
 use App\TestAnswer;
+use App\Essay;
 use App\Topic;
 use App\Question;
 use App\QuestionsOption;
@@ -46,6 +47,11 @@ class TestsController extends Controller
         return view('tests.create', compact('questions', 'essays'));
     }
 
+    public function essay()
+    {
+        $essay = Essay::inRandomOrder()->get();
+        return view('tests.essay', compact('essay'));
+    }
     /**
      * Store a newly solved Test in storage with results.
      *

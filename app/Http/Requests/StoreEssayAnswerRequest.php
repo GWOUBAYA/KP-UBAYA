@@ -24,7 +24,7 @@ class StoreEssayAnswerRequest extends FormRequest
     public function rules()
     {
         return [
-            'question_id' => 'required',
+            'essay_id' => 'required',
             'answer' => 'required',
         ];
     }
