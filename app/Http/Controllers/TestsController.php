@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use DB;
+use App\Essay;
+use App\Essayanswer;
+use App\Essayresult;
 use Auth;
 use App\Test;
 use App\TestAnswer;
@@ -24,11 +27,13 @@ class TestsController extends Controller
     {
         // $topics = Topic::inRandomOrder()->limit(10)->get();
 
+        $essays = Essay::all();
         $questions = Question::inRandomOrder()->limit(10)->get();
         foreach ($questions as &$question) {
             $question->options = QuestionsOption::where('question_id', $question->id)->inRandomOrder()->get();
+            // dd($question->options);
         }
-
+        // dd($essays);
         /*
         foreach ($topics as $topic) {
             if ($topic->questions->count()) {
@@ -39,7 +44,7 @@ class TestsController extends Controller
         }
         */
 
-        return view('tests.create', compact('questions'));
+        return view('tests.create', compact('questions', 'essays'));
     }
 
     public function essay()
@@ -55,12 +60,28 @@ class TestsController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->input('essay_text'));
         $result = 0;
 
         $test = Test::create([
             'user_id' => Auth::id(),
             'result'  => $result,
         ]);
+
+        foreach ($request->input('questions2', []) as $key => $question) {
+            // dd($request->input('essay_text'));
+            $status = 0;
+            Essayanswer::create([
+                'user_id'   => Auth::id(),
+                'test_id'   => $test->id,
+                'essay_id'  => $question,
+                'answer'    => $request->input('essay_text'.$question),
+                'correct'   => $status,
+            ]);
+            // dd($request->input('essay_text'.$question));
+        }
+
+
 
         foreach ($request->input('questions', []) as $key => $question) {
             $status = 0;
@@ -79,6 +100,9 @@ class TestsController extends Controller
                 'option_id'   => $request->input('answers.' . $question),
                 'correct'     => $status,
             ]);
+            // dd($request->input('answers.' . $question), $question);
+
+            // dd($request->input('answers.' . $question));
         }
 
         $test->update(['result' => $result]);

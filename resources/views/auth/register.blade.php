@@ -7,7 +7,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Register</div>
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
+                    <form class="form-horizontal" role="form" method="POST" enctype="multipart/form-data" action="{{ url('/register') }}">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -132,12 +132,31 @@
                             </div>
                         </div>
 
+
+                        <div class="form-group{{ $errors->has('cv') ? ' has-error' : '' }}">
+                            <label for="cv" class="col-md-4 control-label">Upload CV</label>
+
+                            <div class="col-md-6">
+                                <input id="cv" type="file" class="form-control" name="cv" required>
+
+                                @if ($errors->has('cv'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('cv') }}</strong>
+                                </span>
+                                @endif
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
                                     Register
                                 </button>
                             </div>
+                            <a href="{{ route('auth.login') }}"
+                                        class="btn btn-default">
+                                    Back to Login
+                                </a>
                         </div>
                     </form>
                 </div>
