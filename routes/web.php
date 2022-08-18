@@ -1,4 +1,5 @@
 <?php
+
 use App\Http\Controllers\LoginController;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Auth;
@@ -9,15 +10,15 @@ Route::get('/', function () {
 });
 
 // Auth::routes();
-
+Auth::routes(['verify' => true]);
 // Authentication Routes...
 $this->get('login', 'Auth\LoginController@showLoginForm')->name('auth.login');
 $this->post('login', 'Auth\LoginController@login')->name('auth.login');
 $this->post('logout', 'Auth\LoginController@logout')->name('auth.logout');
 
 // Registration Routes...
-$this->get('register', 'Auth\RegisterController@showRegistrationForm')->name('auth.register');
-$this->post('register', 'RegisterController@store')->name('auth.register')->middleware('verified');;
+$this->get('register', 'Auth\RegisterController@showRegistrationForm')->name('authe.register');
+$this->post('register', 'RegisterController@store')->name('authe.register')->middleware('verified');;
 
 // Password Reset Routes...
 $this->get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('auth.password.reset');
@@ -25,7 +26,9 @@ $this->post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail'
 $this->get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('auth.password.email');
 $this->post('password/reset', 'Auth\ResetPasswordController@reset')->name('auth.password.reset');
 
-
+Route::get('email/verify', 'Auth\VerificationController@show')->name('verification.notice');
+Route::get('email/verify/{id}', 'Auth\VerificationController@verify')->name('verification.verify');
+Route::get('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', 'HomeController@index');
     Route::get('/tests/essay', 'TestsController@essay')->name('tests.essay');
@@ -57,3 +60,6 @@ Route::group(['middleware' => 'auth'], function () {
     // Route::put('/download/{id}', 'ResultsController@updateAcc')->name("download");
     Route::get('/download/{file}', 'ResultsController@download');
 });
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

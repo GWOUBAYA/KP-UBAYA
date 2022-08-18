@@ -9,7 +9,6 @@ use App\Essayresult;
 use Auth;
 use App\Test;
 use App\TestAnswer;
-use App\Essay;
 use App\Topic;
 use App\Question;
 use App\QuestionsOption;
@@ -75,7 +74,7 @@ class TestsController extends Controller
                 'user_id'   => Auth::id(),
                 'test_id'   => $test->id,
                 'essay_id'  => $question,
-                'answer'    => $request->input('essay_text'.$question),
+                'answer'    => $request->input('essay_text' . $question),
                 'correct'   => $status,
             ]);
             // dd($request->input('essay_text'.$question));
